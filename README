@@ -1,0 +1,21 @@
+Yocto layer for the FINEP UAV at the Universidade Federal de Minas Gerais. 
+
+This layer depends on:
+
+URI: git://git.yoctoproject.org/poky.git
+branch: danny
+revision: HEAD
+
+URI: git://github.com/openembedded/meta-oe.git
+branch: danny
+revision: HEAD
+
+URI: git://github.com/gumstix/meta-gumstix.git
+branch: danny
+revision: HEAD
+
+URI: git://github.com/bmwcarit/meta-ros.git
+branch: master
+revision: HEAD
+
+Layer maintainer: Dimas Abreu Dutra <dimasadutra@gmail.com> for UFMG.
