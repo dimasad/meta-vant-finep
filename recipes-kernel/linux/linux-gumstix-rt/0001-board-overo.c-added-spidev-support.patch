@@ -1,0 +1,58 @@
+From 16e5b225b19eb0c30f970b8459f1989ab4b25e40 Mon Sep 17 00:00:00 2001
+From: Dimas Abreu Dutra <dimasadutra@gmail.com>
+Date: Sun, 23 Jun 2013 23:55:07 -0300
+Subject: [PATCH] board-overo.c: Added spidev support.
+
+---
+ arch/arm/mach-omap2/board-overo.c | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-omap2/board-overo.c b/arch/arm/mach-omap2/board-overo.c
+index 33aa391..ce8c0b8 100644
+--- a/arch/arm/mach-omap2/board-overo.c
++++ b/arch/arm/mach-omap2/board-overo.c
+@@ -238,7 +238,7 @@ static struct omap_dss_device overo_lcd43_device = {
+ 	.phy.dpi.data_lines	= 24,
+ };
+ 
+-#if defined(CONFIG_PANEL_LGPHILIPS_LB035Q02) || \
++#if defined(CONFIG_PANEL_LGPHILIPS_LB035Q02) ||		\
+ 	defined(CONFIG_PANEL_LGPHILIPS_LB035Q02_MODULE)
+ static struct omap_dss_device overo_lcd35_device = {
+ 	.type			= OMAP_DISPLAY_TYPE_DPI,
+@@ -457,6 +457,17 @@ static int __init overo_i2c_init(void)
+ }
+ 
+ static struct spi_board_info overo_spi_board_info[] __initdata = {
++#if !defined(CONFIG_TOUCHSCREEN_ADS7846) && \
++	!defined(CONFIG_TOUCHSCREEN_ADS7846_MODULE) && \
++	(defined(CONFIG_SPI_SPIDEV) || defined(CONFIG_SPI_SPIDEV_MODULE))
++	{
++		.modalias		= "spidev",
++		.bus_num		= 1,
++		.chip_select		= 0,
++		.max_speed_hz		= 48000000,
++		.mode			= SPI_MODE_0,
++	},
++#endif
+ #if defined(CONFIG_PANEL_LGPHILIPS_LB035Q02) || \
+ 	defined(CONFIG_PANEL_LGPHILIPS_LB035Q02_MODULE)
+ 	{
+@@ -466,6 +477,14 @@ static struct spi_board_info overo_spi_board_info[] __initdata = {
+ 		.max_speed_hz		= 500000,
+ 		.mode			= SPI_MODE_3,
+ 	},
++#elif defined(CONFIG_SPI_SPIDEV) || defined(CONFIG_SPI_SPIDEV_MODULE)
++	{
++		.modalias		= "spidev",
++		.bus_num		= 1,
++		.chip_select		= 1,
++		.max_speed_hz		= 48000000,
++		.mode			= SPI_MODE_0,
++	},
+ #endif
+ };
+ 
+-- 
+1.8.3
+
