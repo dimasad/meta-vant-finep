@@ -26,7 +26,7 @@ do_copy_pdvapilot_msgdef() {
 
 do_configure_append() {
     cd ${WORKDIR}/mavlink_src
-    mkdir build
+    mkdir -p build
     cd build
     cmake ..
 }
