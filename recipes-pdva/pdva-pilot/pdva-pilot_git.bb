@@ -3,7 +3,7 @@ DEFAULT_PREFERENCE = "-1"
 DESCRIPTION = "Autopilot of UFMG's PDVA group"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Proprietary;md5=0557f9d92cf58f2ccdd50f62f8ac0b28"
-DEPENDS = "glib-2 libconfig"
+DEPENDS = "glib-2.0 libconfig"
 PR = "r0"
 PV = "0.0+git${SRCREV}"
 
