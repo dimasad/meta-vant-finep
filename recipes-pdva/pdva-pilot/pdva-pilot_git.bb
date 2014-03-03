@@ -29,10 +29,15 @@ do_configure_append() {
     mkdir -p build
     cd build
     cmake ..
+    
+    ln -s ${WORKDIR}/mavlink_src/build/C/include/mavlink ${WORKDIR}/pdva-pilot_src/mavlink
 }
 
 do_compile_prepend() {
+    #Generate Mavlink messages
     cd ${WORKDIR}/mavlink_src/build
-    make
-    cp -r ${WORKDIR}/mavlink_src/build/C/include/mavlink ${WORKDIR}/pdva-pilot_src/
+    oe_runmake
+
+    #Return to pdva-pilot build directory
+    cd ${S}
 }
